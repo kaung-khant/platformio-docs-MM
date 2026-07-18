@@ -1,55 +1,69 @@
-..  Copyright 2014-present PlatformIO <contact@platformio.org>
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
+..  မူပိုင်ခွင့် 2014-ယခုအချိန်ထိ PlatformIO <contact@platformio.org>
+    Apache License, Version 2.0 ("License") အောက်တွင် လိုင်စင်ရရှိထားပါသည်;
+    License နှင့် ကိုက်ညီစွာမှသာ ဤဖိုင်ကို အသုံးပြုခွင့်ရှိပါသည်။
+    License မိတ္တူကို အောက်ပါနေရာတွင် ရယူနိုင်ပါသည် -
        http://www.apache.org/licenses/LICENSE-2.0
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
+    သက်ဆိုင်ရာဥပဒေအရ လိုအပ်ခြင်း သို့မဟုတ် စာဖြင့်သဘောတူထားခြင်း မရှိပါက၊
+    License အောက်တွင် ဖြန့်ချိသော software သည် "AS IS" အခြေအနေအတိုင်း
+    ဖြန့်ချိသည်ဖြစ်ပြီး၊ မည်သည့်အာမခံချက် သို့မဟုတ် စည်းကမ်းသတ်မှတ်ချက်မျှ
+    တိုက်ရိုက်ဖြစ်စေ၊ သွယ်ဝိုက်၍ဖြစ်စေ မပါဝင်ပါ။
+    ခွင့်ပြုချက်နှင့် ကန့်သတ်ချက်များအတွက် License ကို ကြည့်ရှုပါ။
 
 .. _tutorial_stm32cube_debugging_unit_testing:
 
-STM32Cube HAL and Nucleo-F401RE: debugging and unit testing
-===========================================================
+STM32Cube HAL နှင့် Nucleo-F401RE - debugging နှင့် unit testing
+====================================================================
 
-The goal of this tutorial is to demonstrate how simple it is to use :ref:`ide_vscode` to develop, run and debug a basic blink project with :ref:`framework_stm32cube` framework for ``STM32 Nucleo-F401RE`` board.
+ဤ tutorial ၏ ရည်ရွယ်ချက်မှာ ``STM32 Nucleo-F401RE`` board အတွက်
+:ref:`framework_stm32cube` framework ဖြင့် အခြေခံ blink project တစ်ခုကို
+develop လုပ်ခြင်း၊ run ခြင်းနှင့် debug လုပ်ရန် :ref:`ide_vscode` ကို
+အသုံးပြုရန် မည်မျှလွယ်ကူကြောင်း ပြသရန် ဖြစ်ပါသည်။
 
-* **Level:** Intermediate
-* **Platforms:** Windows, Mac OS X, Linux
+* **အဆင့်:** အလယ်အလတ် (Intermediate)
+* **Platform များ:** Windows, Mac OS X, Linux
 
-**Requirements:**
+**လိုအပ်ချက်များ:**
 
-- Downloaded and installed :ref:`ide_vscode`
-- Install drivers for :ref:`debugging_tool_stlink` debug tool
+- :ref:`ide_vscode` ကို download လုပ်ပြီး install ပြုလုပ်ထားရန်
+- :ref:`debugging_tool_stlink` debug tool အတွက် driver များ install လုပ်ရန်
 - :ref:`board_ststm32_nucleo_f401re` development board
 
 
-.. contents:: Contents
+.. contents:: မာတိကာ
   :local:
 
-Setting Up the Project
-----------------------
+Project ကို စတင်ပြင်ဆင်ခြင်း
+------------------------------
 
-At first step, we need to create a new project using PlatformIO Home Page (to open this page just press Home icon on the toolbar):
+ပထမအဆင့်တွင် PlatformIO Home Page ကို အသုံးပြု၍ project အသစ်တစ်ခု
+ဖန်တီးရန် လိုအပ်ပါသည် (ဤ page ကို ဖွင့်ရန် toolbar ပေါ်ရှိ Home icon ကို
+နှိပ်ရုံဖြင့် ရနိုင်ပါသည်) -
 
 .. image:: ../../_static/images/tutorials/ststm32/stm32cube-debugging-unit-testing-1.png
 
-On the next step, we need to select ``ST Nucleo-F401RE`` as a development board, :ref:`framework_stm32cube` as a framework and a path to the project location (or use the default one):
+နောက်အဆင့်တွင် development board အဖြစ် ``ST Nucleo-F401RE``၊ framework
+အဖြစ် :ref:`framework_stm32cube` နှင့် project တည်နေရာလမ်းကြောင်း
+(သို့မဟုတ် default ကို အသုံးပြုနိုင်သည်) ကို ရွေးချယ်ရန် လိုအပ်ပါသည် -
 
 .. image:: ../../_static/images/tutorials/ststm32/stm32cube-debugging-unit-testing-2.png
 
-Processing the selected project may take some amount of time (PlatformIO will download and install all required packages) and after these steps, we have a fully configured project that is ready for developing code with :ref:`framework_stm32cube` framework.
+ရွေးချယ်ထားသော project ကို processing လုပ်ရန် အချိန်အနည်းငယ် ကြာနိုင်ပါသည်
+(PlatformIO သည် လိုအပ်သော package အားလုံးကို download လုပ်ပြီး install
+ပြုလုပ်ပါလိမ့်မည်) ဤအဆင့်များပြီးနောက် :ref:`framework_stm32cube`
+framework ဖြင့် code ရေးသားရန် အသင့်ဖြစ်နေသော configuration
+အပြည့်အစုံပါ project တစ်ခု ရရှိပါလိမ့်မည်။
 
-Adding Code to the Generated Project
-------------------------------------
+ဖန်တီးထားသော Project ထဲသို့ Code ထည့်သွင်းခြင်း
+--------------------------------------------------
 
-Let's add some actual code to the project. Firstly, we create two main files ``main.c`` and ``main.h`` in the :ref:`projectconf_pio_src_dir` folder. Right click on the ``src`` in the project window:
+Project ထဲသို့ တကယ့် code အချို့ ထည့်ကြည့်ကြပါစို့။ ပထမဦးစွာ
+:ref:`projectconf_pio_src_dir` folder တွင် main file နှစ်ခု ``main.c``
+နှင့် ``main.h`` ကို ဖန်တီးပါမည်။ project window ရှိ ``src`` ကို
+right click နှိပ်ပါ -
 
 .. image:: ../../_static/images/tutorials/ststm32/stm32cube-debugging-unit-testing-3.png
 
-Add next content to ``main.h``:
+``main.h`` ထဲသို့ အောက်ပါ content ကို ထည့်ပါ -
 
 .. code:: cpp
 
@@ -65,7 +79,7 @@ Add next content to ``main.h``:
   #endif // MAIN_H
 
 
-Add this code to ``main.c``:
+``main.c`` ထဲသို့ ဤ code ကို ထည့်ပါ -
 
 .. code:: cpp
 
@@ -101,63 +115,85 @@ Add this code to ``main.c``:
     HAL_IncTick();
   }
 
-After this step, we created a basic blink project that is ready for compiling and uploading.
+ဤအဆင့်ပြီးနောက် compile လုပ်ရန်နှင့် upload လုပ်ရန် အသင့်ဖြစ်နေသော
+အခြေခံ blink project တစ်ခု ဖန်တီးပြီးပါပြီ။
 
-Compiling and Uploading the Firmware
-------------------------------------
+Firmware ကို Compile လုပ်ခြင်းနှင့် Upload လုပ်ခြင်း
+-------------------------------------------------------
 
-Now we can build the project. To compile firmware we can use next options:
-Build option on the ``Project Tasks`` menu, Build button on :ref:`ide_vscode_toolbar`, using Command Palette ``View: Command Palette > PlatformIO: Build``, using Task Menu ``Tasks: Run Task... > PlatformIO: Build`` or via hotkeys ``cmd-alt-b / ctrl-alt-b``:
+ယခု project ကို build လုပ်နိုင်ပါပြီ။ firmware ကို compile လုပ်ရန်
+အောက်ပါ option များကို အသုံးပြုနိုင်ပါသည် -
+``Project Tasks`` menu ရှိ Build option၊ :ref:`ide_vscode_toolbar` ရှိ
+Build ခလုတ်၊ Command Palette ``View: Command Palette > PlatformIO: Build``
+ကို အသုံးပြု၍၊ Task Menu ``Tasks: Run Task... > PlatformIO: Build`` ကို
+အသုံးပြု၍ သို့မဟုတ် hotkey ``cmd-alt-b / ctrl-alt-b`` ဖြင့် -
 
 .. image:: ../../_static/images/tutorials/ststm32/stm32cube-debugging-unit-testing-4.png
 
-If everything went well, we should see the successful result in the terminal window:
+အားလုံးအဆင်ပြေပါက terminal window တွင် အောင်မြင်ကြောင်း ရလဒ်ကို
+တွေ့ရမည် ဖြစ်ပါသည် -
 
 .. image:: ../../_static/images/tutorials/ststm32/stm32cube-debugging-unit-testing-5.png
 
-To upload the firmware to the board we can use next options:
-Upload option on the ``Project Tasks`` menu, Upload button on :ref:`ide_vscode_toolbar`, using Command Palette ``View: Command Palette > PlatformIO: Upload``, using Task Menu ``Tasks: Run Task... > PlatformIO: Upload`` or via hotkeys ``cmd-alt-u / ctrl-alt-u``:
+firmware ကို board ပေါ်သို့ upload လုပ်ရန် အောက်ပါ option များကို
+အသုံးပြုနိုင်ပါသည် -
+``Project Tasks`` menu ရှိ Upload option၊ :ref:`ide_vscode_toolbar` ရှိ
+Upload ခလုတ်၊ Command Palette ``View: Command Palette > PlatformIO: Upload``
+ကို အသုံးပြု၍၊ Task Menu ``Tasks: Run Task... > PlatformIO: Upload`` ကို
+အသုံးပြု၍ သို့မဟုတ် hotkey ``cmd-alt-u / ctrl-alt-u`` ဖြင့် -
 
 .. image:: ../../_static/images/tutorials/ststm32/stm32cube-debugging-unit-testing-6.png
 
-After successful uploading, the green LED2 should start blinking.
+upload အောင်မြင်ပြီးနောက် အစိမ်းရောင် LED2 သည် blink စတင်လုပ်သင့်ပါသည်။
 
-Debugging the Firmware
-----------------------
+Firmware ကို Debug လုပ်ခြင်း
+------------------------------
 
-:ref:`piodebug` offers the easiest way to debug your board. To start debugging session you can use ``Start debugging`` option in ``PlatformIO Quick Access`` menu, ``Debug: Start debugging`` from the top menu or hotkey button ``F5``:
+သင့် board ကို debug လုပ်ရန် အလွယ်ကူဆုံးသော နည်းလမ်းကို :ref:`piodebug`
+က ပေးအပ်ပါသည်။ debugging session ကို စတင်ရန် ``PlatformIO Quick Access``
+menu ရှိ ``Start debugging`` option၊ top menu ရှိ ``Debug: Start
+debugging`` သို့မဟုတ် hotkey ခလုတ် ``F5`` ကို အသုံးပြုနိုင်ပါသည် -
 
 .. image:: ../../_static/images/tutorials/ststm32/stm32cube-debugging-unit-testing-7.png
 
-We need to wait some time while PlatformIO is initializing debug session and when the first line after the main function is highlighted we are ready to debug:
+PlatformIO သည် debug session ကို initialize လုပ်နေစဉ် အချိန်အနည်းငယ်
+စောင့်ရန် လိုအပ်ပြီး main function ၏ ပထမဆုံး line ကို highlight
+ပြသောအခါ debug ပြုလုပ်ရန် အသင့်ဖြစ်ပါပြီ -
 
 .. image:: ../../_static/images/tutorials/ststm32/stm32cube-debugging-unit-testing-8.png
 
-We can walk through the code using control buttons, set breakpoints, see peripheral registers, add variables to ``Watch window``:
+control ခလုတ်များကို အသုံးပြု၍ code ကို တစ်လှမ်းချင်း လျှောက်ကြည့်နိုင်ပြီး၊
+breakpoint များ သတ်မှတ်နိုင်ပြီး၊ peripheral register များကို ကြည့်နိုင်ပြီး
+``Watch window`` သို့ variable များ ထည့်နိုင်ပါသည် -
 
 .. image:: ../../_static/images/tutorials/ststm32/stm32cube-debugging-unit-testing-9.png
 
-Writing Unit Tests
-------------------
+Unit Test များ ရေးသားခြင်း
+-----------------------------
 
-Now let's write some tests using the :ref:`unit_testing` solution that can help us
-test code directly on the target board. We will use the :ref:`unit_testing_frameworks_unity`
-testing framework. Since there is no default configuration for the :ref:`framework_stm32cube`
-framework, we will provide a :ref:`unit_testing_frameworks_unity_custom_config`.
+ယခု target board ပေါ်တွင် code ကို တိုက်ရိုက် test လုပ်ရန် ကူညီပေးနိုင်သော
+:ref:`unit_testing` solution ကို အသုံးပြု၍ test အချို့ ရေးကြပါစို့။
+:ref:`unit_testing_frameworks_unity` testing framework ကို အသုံးပြုပါမည်။
+:ref:`framework_stm32cube` framework အတွက် default configuration
+မရှိသောကြောင့် :ref:`unit_testing_frameworks_unity_custom_config` ကို
+ပေးအပ်ပါမည်။
 
-Also, we need to create a new folder ``test`` where the tests and custom
-:ref:`unit_testing_frameworks_unity` configuration (described next) will be located:
+ထို့အပြင် test များနှင့် custom :ref:`unit_testing_frameworks_unity`
+configuration (နောက်တွင် ဖော်ပြထားသည်) ရှိမည့် folder အသစ် ``test``
+ကို ဖန်တီးရန် လိုအပ်ပါသည် -
 
 .. image:: ../../_static/images/tutorials/ststm32/stm32cube-debugging-unit-testing-10.png
 
-We will use ``USART2`` on ``ST Nucleo-F401RE`` board because it's directly connected
-to the STLink debug interface and in OS it can be visible as a Virtual Com Port,
-so we don't need any additional USB-UART converter. To implement the custom
-:ref:`unit_testing_frameworks_unity` configuration we need to create two
-files ``unity_config.h`` and ``unity_config.c`` and put them in
-the :ref:`projectconf_pio_test_dir` in the root folder of our project.
+``ST Nucleo-F401RE`` board ပေါ်ရှိ ``USART2`` ကို အသုံးပြုပါမည်၊
+အဘယ်ကြောင့်ဆိုသော် ၎င်းသည် STLink debug interface နှင့် တိုက်ရိုက်
+ချိတ်ဆက်ထားပြီး OS တွင် Virtual Com Port အဖြစ် မြင်နိုင်သောကြောင့်
+additional USB-UART converter မလိုအပ်ပါ။ custom
+:ref:`unit_testing_frameworks_unity` configuration ကို implement
+လုပ်ရန် ကျွန်ုပ်တို့၏ project ၏ root folder ရှိ
+:ref:`projectconf_pio_test_dir` တွင် file နှစ်ခု ``unity_config.h``
+နှင့် ``unity_config.c`` ကို ဖန်တီးပြီး ထားရန် လိုအပ်ပါသည်။
 
-Implementation of ``unity_config.h``:
+``unity_config.h`` ၏ Implementation:
 
 .. code:: cpp
 
@@ -193,7 +229,7 @@ Implementation of ``unity_config.h``:
 
   #endif /* UNITY_CONFIG_H */
 
-Implementation of ``unity_config.c``:
+``unity_config.c`` ၏ Implementation:
 
 .. code:: cpp
 
@@ -273,16 +309,34 @@ Implementation of ``unity_config.c``:
     USARTx_TX_GPIO_CLK_DISABLE();
   }
 
-Now we need to add some test cases. Tests can be added to a single C file that may include multiple tests. First of all, we need to add three default functions: ``setUp``, ``tearDown`` and ``main``. ``setUp`` and ``tearDown`` are used to initialize and finalize test conditions. Implementations of these functions are not required for running tests but if you need to initialize some variables before you run a test, you use the ``setUp`` function and if you need to clean up variables you use ``tearDown`` function. In our example, we will use these functions to accordingly initialize and deinitialize LED.  ``main`` function acts as a simple program where we describe our test plan.
+ယခု test case အချို့ ထည့်ရန် လိုအပ်ပါသည်။ test များကို test
+အများအပြားပါဝင်နိုင်သော C file တစ်ခုတည်းထဲသို့ ထည့်နိုင်ပါသည်။
+ပထမဦးစွာ default function သုံးခု ထည့်ရန် လိုအပ်ပါသည် - ``setUp``,
+``tearDown`` နှင့် ``main``။ ``setUp`` နှင့် ``tearDown`` တို့ကို
+test condition များ initialize လုပ်ရန်နှင့် finalize လုပ်ရန်
+အသုံးပြုပါသည်။ ဤ function များကို implement လုပ်ရန် test run
+ရန်အတွက် မလိုအပ်သော်လည်း test တစ်ခု run ခြင်းမပြုမီ variable
+အချို့ initialize လုပ်ရန် လိုအပ်ပါက ``setUp`` function ကို
+အသုံးပြုပြီး variable များ ရှင်းလင်းရန် လိုအပ်ပါက ``tearDown``
+function ကို အသုံးပြုပါ။ ကျွန်ုပ်တို့၏ ဥပမာတွင် ဤ function များကို
+LED ကို အသီးသီး initialize လုပ်ရန်နှင့် deinitialize လုပ်ရန်
+အသုံးပြုပါမည်။ ``main`` function သည် ကျွန်ုပ်တို့၏ test plan ကို
+ဖော်ပြသည့် ရိုးရှင်းသော program တစ်ခုကဲ့သို့ လုပ်ဆောင်ပါသည်။
 
-Let's add a new file ``test_main.c`` to the folder ``test``. Next basic tests for blinking routine will be implemented in this file:
+``test`` folder ထဲသို့ file အသစ် ``test_main.c`` ကို ထည့်ကြပါစို့။
+blinking routine အတွက် အခြေခံ test များကို ဤ file တွင်
+အကောင်အထည်ဖော်ပါမည် -
 
-* ``test_led_builtin_pin_number`` ensures that ``LED_PIN`` has the correct value
-* ``test_led_state_high``  tests functions ``HAL_GPIO_WritePin`` and ``HAL_GPIO_ReadPin`` with ``GPIO_PIN_SET`` value
-* ``test_led_state_low``  tests functions ``HAL_GPIO_WritePin`` and ``HAL_GPIO_ReadPin`` with ``GPIO_PIN_RESET`` value
+* ``test_led_builtin_pin_number`` က ``LED_PIN`` သည် မှန်ကန်သော value
+  ရှိကြောင်း သေချာစေပါသည်
+* ``test_led_state_high`` က ``GPIO_PIN_SET`` value ဖြင့် function
+  ``HAL_GPIO_WritePin`` နှင့် ``HAL_GPIO_ReadPin`` ကို test လုပ်ပါသည်
+* ``test_led_state_low`` က ``GPIO_PIN_RESET`` value ဖြင့် function
+  ``HAL_GPIO_WritePin`` နှင့် ``HAL_GPIO_ReadPin`` ကို test လုပ်ပါသည်
 
 .. note::
-  * 2 sec delay is required  since the board doesn't support software resetting  via ``Serial.DTR/RTS``
+  * board သည် ``Serial.DTR/RTS`` မှတစ်ဆင့် software resetting ကို
+    မပံ့ပိုးသောကြောင့် ၂ စက္ကန့် delay လိုအပ်ပါသည်
 
 .. code:: cpp
 
@@ -324,8 +378,8 @@ Let's add a new file ``test_main.c`` to the folder ``test``. Next basic tests fo
 
   int main()
   {
-    HAL_Init();      // initialize the HAL library
-    HAL_Delay(2000); // service delay
+    HAL_Init();      // HAL library ကို initialize လုပ်ပါ
+    HAL_Delay(2000); // ဝန်ဆောင်မှု delay
 
     UNITY_BEGIN();
     RUN_TEST(test_led_builtin_pin_number);
@@ -338,7 +392,7 @@ Let's add a new file ``test_main.c`` to the folder ``test``. Next basic tests fo
       HAL_Delay(500);
     }
 
-    UNITY_END(); // stop unit testing
+    UNITY_END(); // unit testing ကို ရပ်တန့်ခြင်း
 
     while (1)
     {
@@ -351,22 +405,31 @@ Let's add a new file ``test_main.c`` to the folder ``test``. Next basic tests fo
   }
 
 
-Now we are ready to upload tests to the board. To do this we can use ``Test`` option from the Project Tasks menu, ``Tasks: Run Task... > PlatformIO Test`` option from the top menu or Test button on :ref:`ide_vscode_toolbar`:
+ယခု board ပေါ်သို့ test များ upload လုပ်ရန် အသင့်ဖြစ်ပါပြီ။ ၎င်းအတွက်
+Project Tasks menu ရှိ ``Test`` option၊ top menu ရှိ ``Tasks: Run Task...
+> PlatformIO Test`` option သို့မဟုတ် :ref:`ide_vscode_toolbar` ရှိ
+Test ခလုတ်ကို အသုံးပြုနိုင်ပါသည် -
 
 .. image:: ../../_static/images/tutorials/ststm32/stm32cube-debugging-unit-testing-11.png
 
-After processing we should see a detailed report about the testing results:
+processing ပြီးနောက် testing ရလဒ်များအကြောင်း အသေးစိတ် report ကို
+တွေ့ရမည် ဖြစ်ပါသည် -
 
 .. image:: ../../_static/images/tutorials/ststm32/stm32cube-debugging-unit-testing-12.png
 
-Congratulations! As we can see from the report, all our tests went successfully!
+ဂုဏ်ယူပါသည်! report မှ တွေ့ရသည့်အတိုင်း ကျွန်ုပ်တို့၏ test အားလုံး
+အောင်မြင်ခဲ့ပါသည်!
 
-Conclusion
-----------
+နိဂုံးချုပ်ချက်
+----------------
 
-Now we have a decent template that we can improve for our next more complex projects.
+ယခု ကျွန်ုပ်တို့တွင် နောက်ပိုင်း ပိုမိုရှုပ်ထွေးသော project များအတွက်
+တိုးတက်အောင် ပြုလုပ်နိုင်သော လျောက်ပတ်သော template တစ်ခု ရရှိပြီ
+ဖြစ်ပါသည်။
 
-Project Source Code
--------------------
+Project ၏ Source Code
+------------------------
 
-The source code of this tutorial is available at https://github.com/platformio/platformio-examples/tree/develop/unit-testing/stm32cube
+ဤ tutorial ၏ source code ကို
+https://github.com/platformio/platformio-examples/tree/develop/unit-testing/stm32cube
+တွင် ရနိုင်ပါသည်။
