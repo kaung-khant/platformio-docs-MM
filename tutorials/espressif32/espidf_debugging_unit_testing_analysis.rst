@@ -1,63 +1,67 @@
-..  Copyright 2014-present PlatformIO <contact@platformio.org>
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
+..  မူပိုင်ခွင့် 2014-ယခုအချိန်ထိ PlatformIO <contact@platformio.org>
+    Apache License, Version 2.0 ("License") အောက်တွင် လိုင်စင်ရရှိထားပါသည်;
+    License နှင့် ကိုက်ညီစွာမှသာ ဤဖိုင်ကို အသုံးပြုခွင့်ရှိပါသည်။
+    License မိတ္တူကို အောက်ပါနေရာတွင် ရယူနိုင်ပါသည် -
        http://www.apache.org/licenses/LICENSE-2.0
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
+    သက်ဆိုင်ရာဥပဒေအရ လိုအပ်ခြင်း သို့မဟုတ် စာဖြင့်သဘောတူထားခြင်း မရှိပါက၊
+    License အောက်တွင် ဖြန့်ချိသော software သည် "AS IS" အခြေအနေအတိုင်း
+    ဖြန့်ချိသည်ဖြစ်ပြီး၊ မည်သည့်အာမခံချက် သို့မဟုတ် စည်းကမ်းသတ်မှတ်ချက်မျှ
+    တိုက်ရိုက်ဖြစ်စေ၊ သွယ်ဝိုက်၍ဖြစ်စေ မပါဝင်ပါ။
+    ခွင့်ပြုချက်နှင့် ကန့်သတ်ချက်များအတွက် License ကို ကြည့်ရှုပါ။
 
 .. _tutorial_espressif32_espidf_debugging_unit_testing_analysis:
 
-Get started with ESP-IDF and ESP32-DevKitC: debugging, unit testing, project analysis
-=====================================================================================
+ESP-IDF နှင့် ESP32-DevKitC ဖြင့် စတင်အသုံးပြုခြင်း - debugging၊ unit testing၊ project analysis
+====================================================================================================
 
-The goal of this tutorial is to demonstrate how simple it is to use :ref:`ide_vscode`
-to develop, run and debug a simple Wi-Fi project with the :ref:`framework_espidf`
-framework for the ``ESP32-DevKitC`` board.
+ဤ tutorial ၏ ရည်ရွယ်ချက်မှာ ``ESP32-DevKitC`` board အတွက် :ref:`framework_espidf`
+framework ဖြင့် ရိုးရှင်းသော Wi-Fi project တစ်ခုကို develop လုပ်ခြင်း၊ run
+ခြင်းနှင့် debug လုပ်ရန် :ref:`ide_vscode` ကို အသုံးပြုရန် မည်မျှလွယ်ကူကြောင်း
+ပြသရန် ဖြစ်ပါသည်။
 
-* **Level:** Intermediate
-* **Platforms:** Windows, Mac OS X, Linux
+* **အဆင့်:** အလယ်အလတ် (Intermediate)
+* **Platform များ:** Windows, Mac OS X, Linux
 
-**Requirements:**
+**လိုအပ်ချက်များ:**
 
-- Downloaded and installed :ref:`ide_vscode`
+- :ref:`ide_vscode` ကို download လုပ်ပြီး install ပြုလုပ်ထားရန်
 - :ref:`board_espressif32_esp32dev`
-- An external debug adapter (e.g. :ref:`debugging_tool_olimex-arm-usb-ocd`)
+- ပြင်ပ debug adapter တစ်ခု (ဥပမာ - :ref:`debugging_tool_olimex-arm-usb-ocd`)
 
-.. contents:: Contents
+.. contents:: မာတိကာ
     :local:
 
-Setting Up the Project
-----------------------
+Project ကို စတင်ပြင်ဆင်ခြင်း
+------------------------------
 
-#.  Click on "PlatformIO Home" button on the bottom PlatformIO Toolbar:
+#.  PlatformIO Toolbar အောက်ခြေရှိ "PlatformIO Home" ခလုတ်ကို နှိပ်ပါ -
 
     .. image:: ../../_static/images/tutorials/espressif32/espidf-debugging-unit-testing-analysis-1.png
 
-#.  Click on "New Project", select ``Espressif ESP32 Dev Module`` as the development board,
-    :ref:`framework_espidf` as the framework and a path to the project location
-    (or use the default one):
+#.  "New Project" ကို နှိပ်ပြီး development board အဖြစ် ``Espressif ESP32
+    Dev Module``၊ framework အဖြစ် :ref:`framework_espidf` နှင့် project
+    တည်နေရာလမ်းကြောင်း (သို့မဟုတ် default ကို အသုံးပြုနိုင်သည်) ကို
+    ရွေးချယ်ပါ -
 
     .. image:: ../../_static/images/tutorials/espressif32/espidf-debugging-unit-testing-analysis-2.png
 
-Adding Code to the Generated Project
-------------------------------------
+ဖန်တီးထားသော Project ထဲသို့ Code ထည့်သွင်းခြင်း
+--------------------------------------------------
 
-#.  Create a new file ``main.c`` in :ref:`projectconf_pio_src_dir` folder and add the
-    following code:
+#.  :ref:`projectconf_pio_src_dir` folder တွင် file အသစ် ``main.c`` ကို
+    ဖန်တီးပြီး အောက်ပါ code ကို ထည့်ပါ -
 
     .. code-block:: c
 
-        /*  WiFi softAP Example
+        /*  WiFi softAP ဥပမာ
 
-           This example code is in the Public Domain (or CC0 licensed, at your option.)
+           ဤ ဥပမာ code သည် Public Domain တွင်ရှိသည် (သို့မဟုတ် သင့်ရွေးချယ်မှု
+           အလိုက် CC0 လိုင်စင်ရရှိသည်။)
 
-           Unless required by applicable law or agreed to in writing, this
-           software is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
-           CONDITIONS OF ANY KIND, either express or implied.
+           သက်ဆိုင်ရာဥပဒေအရ လိုအပ်ခြင်း သို့မဟုတ် စာဖြင့်သဘောတူထားခြင်း
+           မရှိပါက၊ ဤ software သည် "AS IS" အခြေအနေအတိုင်း ဖြန့်ချိသည်ဖြစ်ပြီး၊
+           မည်သည့်အာမခံချက် သို့မဟုတ် စည်းကမ်းသတ်မှတ်ချက်မျှ တိုက်ရိုက်ဖြစ်စေ၊
+           သွယ်ဝိုက်၍ဖြစ်စေ မပါဝင်ပါ။
         */
         #include <string.h>
         #include "freertos/FreeRTOS.h"
@@ -71,10 +75,12 @@ Adding Code to the Generated Project
         #include "lwip/err.h"
         #include "lwip/sys.h"
 
-        /* The examples use WiFi configuration that you can set via project configuration menu.
+        /* ဤ ဥပမာများသည် project configuration menu မှတစ်ဆင့် သတ်မှတ်နိုင်သော
+           WiFi configuration ကို အသုံးပြုပါသည်။
 
-           If you'd rather not, just change the below entries to strings with
-           the config you want - ie #define EXAMPLE_WIFI_SSID "mywifissid"
+           သင်ထိုသို့ မလိုလားပါက အောက်ပါ entry များကို သင်လိုချင်သော config
+           ပါသော string များအဖြစ် ပြောင်းလိုက်ရုံပါပဲ - ဥပမာ #define
+           EXAMPLE_WIFI_SSID "mywifissid"
         */
         #define EXAMPLE_ESP_WIFI_SSID      "mywifissid"
         #define EXAMPLE_ESP_WIFI_PASS      "mywifipass"
@@ -139,7 +145,7 @@ Adding Code to the Generated Project
 
         void app_main(void)
         {
-            //Initialize NVS
+            //NVS ကို Initialize လုပ်ပါ
             esp_err_t ret = nvs_flash_init();
             if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
               ESP_ERROR_CHECK(nvs_flash_erase());
@@ -152,40 +158,43 @@ Adding Code to the Generated Project
         }
 
     .. warning::
-        Make sure this new file ``main.c`` is registered as source file using
-        ``idf_component_register`` function in ``src/CMakeLists.txt`` file:
+        ဤ file အသစ် ``main.c`` ကို ``src/CMakeLists.txt`` file ရှိ
+        ``idf_component_register`` function ဖြင့် source file အဖြစ်
+        register လုပ်ထားကြောင်း သေချာပါစေ -
 
         .. code-block:: cmake
 
           idf_component_register(SRCS "main.c")
 
-#.  To compile the project use one of the following options:
+#.  project ကို compile လုပ်ရန် အောက်ပါ option များထဲမှ တစ်ခုကို
+    အသုံးပြုပါ -
 
-    - Build option from the ``Project Tasks`` menu
-    - Build button in :ref:`ide_vscode_toolbar`
-    - Task Menu ``Tasks: Run Task... > PlatformIO: Build`` or in :ref:`ide_vscode_toolbar`
+    - ``Project Tasks`` menu ရှိ Build option
+    - :ref:`ide_vscode_toolbar` ရှိ Build ခလုတ်
+    - Task Menu ``Tasks: Run Task... > PlatformIO: Build`` (သို့) :ref:`ide_vscode_toolbar` တွင်
     - Command Palette ``View: Command Palette > PlatformIO: Build``
     - Hotkeys ``cmd-alt-b / ctrl-alt-b``:
 
     .. image:: ../../_static/images/tutorials/espressif32/espidf-debugging-unit-testing-analysis-3.png
 
-#.  If everything went well, we should see a successful result message in the terminal
-    window:
+#.  အားလုံးအဆင်ပြေပါက terminal window တွင် အောင်မြင်ကြောင်း ရလဒ် message
+    ကို တွေ့ရမည် ဖြစ်ပါသည် -
 
     .. image:: ../../_static/images/tutorials/espressif32/espidf-debugging-unit-testing-analysis-4.png
 
-#.  To upload the firmware to the board we can use the following options:
+#.  firmware ကို board ပေါ်သို့ upload လုပ်ရန် အောက်ပါ option များကို
+    အသုံးပြုနိုင်ပါသည် -
 
-    - Upload option from the ``Project Tasks`` menu
-    - Upload button in :ref:`ide_vscode_toolbar`
+    - ``Project Tasks`` menu ရှိ Upload option
+    - :ref:`ide_vscode_toolbar` ရှိ Upload ခလုတ်
     - Command Palette ``View: Command Palette > PlatformIO: Upload``
     - Task Menu ``Tasks: Run Task... > PlatformIO: Upload``
     - Hotkeys ``cmd-alt-u / ctrl-alt-u``:
 
     .. image:: ../../_static/images/tutorials/espressif32/espidf-debugging-unit-testing-analysis-5.png
 
-#.  Connect the board to your computer and update the default monitor speed to
-    ``115200`` in ``platformio.ini`` file:
+#.  board ကို သင့် ကွန်ပျူတာသို့ ချိတ်ဆက်ပြီး ``platformio.ini`` file ရှိ
+    default monitor speed ကို ``115200`` သို့ update လုပ်ပါ -
 
     .. code-block:: ini
 
@@ -195,28 +204,28 @@ Adding Code to the Generated Project
       framework = espidf
       monitor_speed = 115200
 
-#.  Open Serial Monitor to observe the output from the board:
+#.  board မှ output ကို ကြည့်ရှုရန် Serial Monitor ကို ဖွင့်ပါ -
 
     .. image:: ../../_static/images/tutorials/espressif32/espidf-debugging-unit-testing-analysis-6.png
 
-#.  If everything went well, the board should be visible as a WiFi access point:
+#.  အားလုံးအဆင်ပြေပါက board သည် WiFi access point တစ်ခုအဖြစ် မြင်နိုင်သင့်ပါသည် -
 
     .. image:: ../../_static/images/tutorials/espressif32/espidf-debugging-unit-testing-analysis-7.png
 
-Debugging the Firmware
-----------------------
+Firmware ကို Debug လုပ်ခြင်း
+------------------------------
 
-Setting Up the Hardware
-~~~~~~~~~~~~~~~~~~~~~~~
+Hardware ကို စတင်ပြင်ဆင်ခြင်း
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In order to use :ref:`piodebug`, we need to connect an external JTAG probe and the board
-using the following pins:
+:ref:`piodebug` ကို အသုံးပြုရန်အတွက် ပြင်ပ JTAG probe နှင့် board ကို
+အောက်ပါ pin များဖြင့် ချိတ်ဆက်ရန် လိုအပ်ပါသည် -
 
 .. list-table::
     :header-rows:  1
 
-    * - ESP32 pin
-      - JTAG probe pin
+    * - ESP32 ရှိ Pin
+      - JTAG probe ရှိ Pin
 
     * - ``3.3V``
       - ``Pin 1(VTref)``
@@ -239,8 +248,9 @@ using the following pins:
     * - ``GPIO 15 (TDO)``
       - ``Pin 13 (TDO)``
 
-#.  Specify :ref:`projectconf_debug_tool` in :ref:`projectconf`. In this tutorial,
-    :ref:`debugging_tool_olimex-arm-usb-ocd-h` debug probe is used:
+#.  :ref:`projectconf` တွင် :ref:`projectconf_debug_tool` ကို သတ်မှတ်ပါ။
+    ဤ tutorial တွင် :ref:`debugging_tool_olimex-arm-usb-ocd-h` debug probe
+    ကို အသုံးပြုထားပါသည် -
 
     .. code-block:: ini
 
@@ -251,34 +261,39 @@ using the following pins:
       monitor_speed = 115200
       debug_tool = olimex-arm-usb-ocd-h
 
-#.  To start the debug session we can use the following methods:
+#.  debug session ကို စတင်ရန် အောက်ပါ method များကို အသုံးပြုနိုင်ပါသည် -
 
-    * ``Debug: Start debugging`` in the top menu
-    * ``Start Debugging`` option in the Quick Access menu
-    * Hotkey button ``F5``:
+    * top menu ရှိ ``Debug: Start debugging``
+    * Quick Access menu ရှိ ``Start Debugging`` option
+    * hotkey ခလုတ် ``F5``:
 
     .. image:: ../../_static/images/tutorials/espressif32/espidf-debugging-unit-testing-analysis-8.png
 
-#.  Walk through the code using control buttons, set breakpoints, and add variables to the ``Watch window``:
+#.  control ခလုတ်များကို အသုံးပြု၍ code ကို တစ်လှမ်းချင်း လျှောက်ကြည့်ပါ၊
+    breakpoint များ သတ်မှတ်ပြီး ``Watch window`` သို့ variable များ
+    ထည့်ပါ -
 
     .. image:: ../../_static/images/tutorials/espressif32/espidf-debugging-unit-testing-analysis-9.png
 
-Writing Unit Tests
-------------------
+Unit Test များ ရေးသားခြင်း
+-----------------------------
 
 .. note::
-    Functions ``setUp`` and ``tearDown`` are used to initialize and finalize test
-    conditions. Implementations of these functions are not required for running tests
-    but if you need to initialize some variables before you run a test, you use the
-    ``setUp`` function and if you need to clean up variables you use ``tearDown``
-    function.
+    function ``setUp`` နှင့် ``tearDown`` တို့ကို test condition များ
+    initialize လုပ်ရန်နှင့် finalize လုပ်ရန် အသုံးပြုပါသည်။ ဤ function
+    များကို implement လုပ်ရန် test run ရန်အတွက် မလိုအပ်သော်လည်း test
+    တစ်ခု run ခြင်းမပြုမီ variable အချို့ initialize လုပ်ရန် လိုအပ်ပါက
+    ``setUp`` function ကို အသုံးပြုပြီး variable များ ရှင်းလင်းရန်
+    လိုအပ်ပါက ``tearDown`` function ကို အသုံးပြုပါ။
 
-For the sake of simplicity, let's create a small library called ``calculator``,
-implement several basic functions ``addition``, ``subtraction``, ``multiplication``,
-``division`` and test them using PlatformIO :ref:`unit_testing` solution.
+ရိုးရှင်းစေရန် ``calculator`` ဟု အမည်ရှိသော library သေးငယ်တစ်ခု
+ဖန်တီးပြီး အခြေခံ function များ ``addition``, ``subtraction``,
+``multiplication``, ``division`` တို့ကို implement လုပ်ကာ PlatformIO
+:ref:`unit_testing` solution ကို အသုံးပြု၍ ၎င်းတို့ကို test လုပ်ကြပါစို့။
 
-#.  Create a new folder ``calculator`` in the :ref:`projectconf_pio_lib_dir` folder and
-    add two new files ``calculator.h`` and ``calculator.c`` with the following contents:
+#.  :ref:`projectconf_pio_lib_dir` folder တွင် folder အသစ် ``calculator``
+    ကို ဖန်တီးပြီး file အသစ်နှစ်ခု ``calculator.h`` နှင့် ``calculator.c``
+    ကို အောက်ပါ content များဖြင့် ထည့်ပါ -
 
     ``calculator.h``:
 
@@ -330,8 +345,8 @@ implement several basic functions ``addition``, ``subtraction``, ``multiplicatio
         return a / b;
       }
 
-#.  Create a new file ``test_calc.c`` to the folder :ref:`projectconf_pio_test_dir`
-    and add basic tests for the ``calculator`` library:
+#.  :ref:`projectconf_pio_test_dir` folder တွင် file အသစ် ``test_calc.c``
+    ကို ဖန်တီးပြီး ``calculator`` library အတွက် အခြေခံ test များ ထည့်ပါ -
 
     .. code-block:: c
 
@@ -340,12 +355,12 @@ implement several basic functions ``addition``, ``subtraction``, ``multiplicatio
 
       void setUp(void)
       {
-        // set stuff up here
+        // ဒီနေရာမှာ လိုအပ်တာတွေ setup လုပ်ပါ
       }
 
       void tearDown(void)
       {
-        // clean stuff up here
+        // ဒီနေရာမှာ ရှင်းလင်းရမယ့်အရာတွေ ရှင်းလင်းပါ
       }
 
       void test_function_calculator_addition(void)
@@ -380,42 +395,44 @@ implement several basic functions ``addition``, ``subtraction``, ``multiplicatio
         UNITY_END();
       }
 
-#.  Let's run tests on the board and check the results. There should be a problem
-    with ``test_function_calculator_division`` test:
+#.  board ပေါ်တွင် test များကို run ပြီး ရလဒ်များကို စစ်ဆေးကြပါစို့။
+    ``test_function_calculator_division`` test တွင် ပြဿနာတစ်ခု
+    ရှိသင့်ပါသည် -
 
     .. image:: ../../_static/images/tutorials/espressif32/espidf-debugging-unit-testing-analysis-10.png
 
-#.  Let's fix the incorrect expected value and run tests again. After processing the
-    results should be correct:
+#.  မှားယွင်းနေသော expected value ကို ပြင်ဆင်ပြီး test များကို ထပ်မံ
+    run ကြပါစို့။ processing ပြီးနောက် ရလဒ်များ မှန်ကန်သင့်ပါသည် -
 
     .. image:: ../../_static/images/tutorials/espressif32/espidf-debugging-unit-testing-analysis-11.png
 
-Project Inspection
-------------------
+Project စစ်ဆေးခြင်း (Inspection)
+-----------------------------------
 
-For illustrative purposes, let's imagine we need to find a function with the biggest
-memory footprint. Also, let's introduce a bug to our project so :ref:`check` can
-report it.
+ရှင်းလင်းပြရန်အတွက် memory footprint အကြီးဆုံးရှိသော function တစ်ခုကို
+ရှာဖွေရန် လိုအပ်သည်ဟု စိတ်ကူးကြပါစို့။ ထို့အပြင် :ref:`check` က report
+တင်နိုင်ရန် ကျွန်ုပ်တို့၏ project ထဲသို့ bug တစ်ခု ထည့်ကြပါစို့။
 
-#.  Open ``PlatformIO Home`` and navigate to ``Inspect`` section, select the current
-    project and press ``Inspect`` button:
+#.  ``PlatformIO Home`` ကို ဖွင့်ပြီး ``Inspect`` section သို့ သွားကာ
+    လက်ရှိ project ကို ရွေးချယ်ပြီး ``Inspect`` ခလုတ်ကို နှိပ်ပါ -
 
     .. image:: ../../_static/images/tutorials/espressif32/espidf-debugging-unit-testing-analysis-12.png
 
-#.  Project statistics:
+#.  Project စာရင်းအင်းများ (Statistics):
 
     .. image:: ../../_static/images/tutorials/espressif32/espidf-debugging-unit-testing-analysis-13.png
 
-#.  The biggest function:
+#.  အကြီးဆုံး function:
 
     .. image:: ../../_static/images/tutorials/espressif32/espidf-debugging-unit-testing-analysis-14.png
 
-#.  Possible bugs:
+#.  ဖြစ်နိုင်ချေရှိသော bug များ:
 
     .. image:: ../../_static/images/tutorials/espressif32/espidf-debugging-unit-testing-analysis-15.png
 
-Conclusion
-----------
+နိဂုံးချုပ်ချက်
+----------------
 
-Now we have a project template for the ``ESP32-DevKitC`` board that we can use as
-boilerplate for later projects.
+ယခု ကျွန်ုပ်တို့တွင် ``ESP32-DevKitC`` board အတွက် နောက်ပိုင်း project
+များအတွက် boilerplate အဖြစ် အသုံးပြုနိုင်သော project template တစ်ခု
+ရရှိပြီ ဖြစ်ပါသည်။
