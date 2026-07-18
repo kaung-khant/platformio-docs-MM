@@ -1,33 +1,34 @@
-..  Copyright (c) 2014-present PlatformIO <contact@platformio.org>
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
+..  မူပိုင်ခွင့် (c) 2014-ယခုအချိန်ထိ PlatformIO <contact@platformio.org>
+    Apache License, Version 2.0 ("License") အောက်တွင် လိုင်စင်ရရှိထားပါသည်;
+    License နှင့် ကိုက်ညီစွာမှသာ ဤဖိုင်ကို အသုံးပြုခွင့်ရှိပါသည်။
+    License မိတ္တူကို အောက်ပါနေရာတွင် ရယူနိုင်ပါသည် -
        http://www.apache.org/licenses/LICENSE-2.0
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
+    သက်ဆိုင်ရာဥပဒေအရ လိုအပ်ခြင်း သို့မဟုတ် စာဖြင့်သဘောတူထားခြင်း မရှိပါက၊
+    License အောက်တွင် ဖြန့်ချိသော software သည် "AS IS" အခြေအနေအတိုင်း
+    ဖြန့်ချိသည်ဖြစ်ပြီး၊ မည်သည့်အာမခံချက် သို့မဟုတ် စည်းကမ်းသတ်မှတ်ချက်မျှ
+    တိုက်ရိုက်ဖြစ်စေ၊ သွယ်ဝိုက်၍ဖြစ်စေ မပါဝင်ပါ။
+    ခွင့်ပြုချက်နှင့် ကန့်သတ်ချက်များအတွက် License ကို ကြည့်ရှုပါ။
 
-Your Gateway to Embedded Software Development Excellence
-========================================================
+Embedded Software Development ထူးချွန်မှုဆီသို့ သင့်ရဲ့ တံခါးဝ
+================================================================
 
-Unlock the true potential of embedded software development with
-PlatformIO's collaborative ecosystem, embracing declarative principles,
-test-driven methodologies, and modern toolchains for unrivaled success.
+Declarative principle များ၊ test-driven methodology များနှင့် ခေတ်မီ
+toolchain များကို လက်ခံကျင့်သုံးထားသော PlatformIO ၏ ပူးပေါင်းဆောင်ရွက်သည့်
+ecosystem ဖြင့် embedded software development ၏ စစ်မှန်သော အလားအလာကို
+ဖွင့်ဟပြီး၊ အံ့သြဖွယ်ကောင်းသော အောင်မြင်မှုကို ရရှိလိုက်ပါ။
 
-* Open source, maximum permissive Apache 2.0 license
-* Cross-platform IDE and Unified Debugger
-* Static Code Analyzer and Remote Unit Testing
-* Multi-platform and Multi-architecture Build System
-* Firmware File Explorer and Memory Inspection.
+* Open source ဖြစ်ပြီး အများဆုံးလွတ်လပ်ခွင့်ပေးသော Apache 2.0 license
+* Cross-platform IDE နှင့် ပေါင်းစည်းထားသော Debugger (Unified Debugger)
+* Static Code Analyzer နှင့် အဝေးမှ Unit Testing (Remote Unit Testing)
+* Multi-platform နှင့် Multi-architecture Build System
+* Firmware File Explorer နှင့် Memory စစ်ဆေးခြင်း (Memory Inspection)။
 
-**Social:** `LinkedIn <https://www.linkedin.com/company/platformio/>`_ |
+**လူမှုကွန်ရက်များ:** `LinkedIn <https://www.linkedin.com/company/platformio/>`_ |
 `Twitter <https://twitter.com/PlatformIO_Org>`_ |
-`Community Forums <https://community.platformio.org>`_
+`အသိုင်းအဝိုင်း ဖိုရမ်များ <https://community.platformio.org>`_
 
-Contents
---------
+မာတိကာ
+------
 
 .. toctree::
     :maxdepth: 2
@@ -35,7 +36,7 @@ Contents
     what-is-platformio
 
 .. toctree::
-    :caption: Getting Started
+    :caption: စတင်အသုံးပြုခြင်း
     :maxdepth: 1
 
     integration/ide/pioide
@@ -45,7 +46,7 @@ Contents
     tutorials/index
 
 .. toctree::
-    :caption: Configuration
+    :caption: ပြင်ဆင်သတ်မှတ်ခြင်း
     :maxdepth: 1
 
     platformio.ini <projectconf/index>
@@ -53,27 +54,27 @@ Contents
     envvars
 
 .. toctree::
-    :caption: Instruments
+    :caption: ကိရိယာများ
     :maxdepth: 1
 
     librarymanager/index
-    Platforms <platforms/index>
+    Platform များ <platforms/index>
     frameworks/index
     boards/index
     platforms/custom_platform_and_board
 
 .. toctree::
-    :caption: Advanced
+    :caption: အဆင့်မြင့်
     :maxdepth: 1
 
-    Scripting <scripting/index>
+    Script ရေးသားခြင်း <scripting/index>
     plus/debugging
     advanced/unit-testing/index
     advanced/static-code-analysis/index
     plus/pio-remote
 
 .. toctree::
-    :caption: Integration
+    :caption: ပေါင်းစည်းအသုံးပြုခြင်း
     :maxdepth: 2
 
     integration/ide/index
@@ -81,10 +82,9 @@ Contents
     integration/compile_commands
 
 .. toctree::
-    :caption: Miscellaneous
+    :caption: အထွေထွေ
     :maxdepth: 1
 
-    FAQ <faq/index>
+    FAQ (မေးလေ့ရှိသောမေးခွန်းများ) <faq/index>
     core/history
     core/migration
-
