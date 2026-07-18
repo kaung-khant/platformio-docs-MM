@@ -1,38 +1,40 @@
-..  Copyright (c) 2014-present PlatformIO <contact@platformio.org>
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
+..  မူပိုင်ခွင့် (c) 2014-ယခုအချိန်ထိ PlatformIO <contact@platformio.org>
+    Apache License, Version 2.0 ("License") အောက်တွင် လိုင်စင်ရရှိထားပါသည်;
+    License နှင့် ကိုက်ညီစွာမှသာ ဤဖိုင်ကို အသုံးပြုခွင့်ရှိပါသည်။
+    License မိတ္တူကို အောက်ပါနေရာတွင် ရယူနိုင်ပါသည် -
        http://www.apache.org/licenses/LICENSE-2.0
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
+    သက်ဆိုင်ရာဥပဒေအရ လိုအပ်ခြင်း သို့မဟုတ် စာဖြင့်သဘောတူထားခြင်း မရှိပါက၊
+    License အောက်တွင် ဖြန့်ချိသော software သည် "AS IS" အခြေအနေအတိုင်း
+    ဖြန့်ချိသည်ဖြစ်ပြီး၊ မည်သည့်အာမခံချက် သို့မဟုတ် စည်းကမ်းသတ်မှတ်ချက်မျှ
+    တိုက်ရိုက်ဖြစ်စေ၊ သွယ်ဝိုက်၍ဖြစ်စေ မပါဝင်ပါ။
+    ခွင့်ပြုချက်နှင့် ကန့်သတ်ချက်များအတွက် License ကို ကြည့်ရှုပါ။
 
 .. _tutorial_unit_testing_blink:
 
-Unit Testing of a "Blink" Project
-=================================
+"Blink" Project တစ်ခုအတွက် Unit Testing ပြုလုပ်ခြင်း
+=====================================================
 
-The goal of this tutorial is to demonstrate how simple it is to use :ref:`unit_testing`.
+ဤ tutorial ၏ ရည်ရွယ်ချက်မှာ :ref:`unit_testing` ကို အသုံးပြုရန် မည်မျှလွယ်ကူကြောင်း
+ပြသရန် ဖြစ်ပါသည်။
 
-* **Level:** Beginner
-* **Platforms:** Windows, macOS, Linux
+* **အဆင့်:** အခြေခံ (Beginner)
+* **Platform များ:** Windows, macOS, Linux
 
-.. contents:: Contents
+.. contents:: မာတိကာ
     :local:
 
-Setting Up the Project
-----------------------
+Project ကို စတင်ပြင်ဆင်ခြင်း
+------------------------------
 
-1. Please navigate to the :ref:`core_quickstart` section and create the "Blink Project".
-2. Create the root ``test`` directory in the project (on the same level as ``src``)
-3. Create a test ``test_blink`` directory (name must be prefixed with ``test_``)
-   and place a ``test_main.cpp`` file in it (the source code is located below).
-4. Run tests using the :ref:`cmd_test` command.
+1. :ref:`core_quickstart` section သို့ သွားပြီး "Blink Project" ကို ဖန်တီးပါ။
+2. Project တွင် root ``test`` directory ကို ဖန်တီးပါ (``src`` နှင့် တစ်လှမ်းတည်းတွင်)
+3. test ``test_blink`` directory တစ်ခု ဖန်တီးပါ (အမည်ကို ``test_`` ဖြင့်
+   စတင်ရမည်) ထို့နောက် ၎င်းထဲတွင် ``test_main.cpp`` ဖိုင်တစ်ခု ထားပါ
+   (source code ကို အောက်တွင် တွေ့နိုင်ပါသည်)။
+4. :ref:`cmd_test` command ကို အသုံးပြု၍ test များကို run ပါ။
 
-Project structure
------------------
+Project ဖွဲ့စည်းပုံ
+---------------------
 
 .. code-block:: bash
 
@@ -42,8 +44,8 @@ Project structure
         └── test_blink
             └── test_main.cpp
 
-Source files
-------------
+Source ဖိုင်များ
+-----------------
 
 * :ref:`projectconf`
 
@@ -63,12 +65,12 @@ Source files
 
     void setUp(void)
     {
-      // set stuff up here
+      // ဒီနေရာမှာ လိုအပ်တာတွေ setup လုပ်ပါ
     }
 
     void tearDown(void)
     {
-      // clean stuff up here
+      // ဒီနေရာမှာ ရှင်းလင်းရမယ့်အရာတွေ ရှင်းလင်းပါ
     }
 
     void test_led_builtin_pin_number(void)
@@ -90,13 +92,13 @@ Source files
 
     void setup()
     {
-      // NOTE!!! Wait for >2 secs
-      // if board doesn't support software reset via Serial.DTR/RTS
+      // မှတ်ချက်!!! ၂ စက္ကန့်ထက် စောင့်ပါ
+      // board သည် Serial.DTR/RTS မှတစ်ဆင့် software reset ကို မပံ့ပိုးပါက
       delay(2000);
 
       pinMode(LED_BUILTIN, OUTPUT);
 
-      UNITY_BEGIN(); // IMPORTANT LINE!
+      UNITY_BEGIN(); // အရေးကြီးသော line!
       RUN_TEST(test_led_builtin_pin_number);
     }
 
@@ -115,12 +117,12 @@ Source files
       }
       else if (i == max_blinks)
       {
-        UNITY_END(); // stop unit testing
+        UNITY_END(); // unit testing ကို ရပ်တန့်ခြင်း
       }
     }
 
-Test results
-------------
+Test ရလဒ်များ
+---------------
 
 .. code::
 
