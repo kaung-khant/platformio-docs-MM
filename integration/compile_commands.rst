@@ -1,47 +1,54 @@
-
-..  Copyright (c) 2014-present PlatformIO <contact@platformio.org>
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
+..  မူပိုင်ခွင့် (c) 2014-ယခုအချိန်ထိ PlatformIO <contact@platformio.org>
+    Apache License, Version 2.0 ("License") အောက်တွင် လိုင်စင်ရရှိထားပါသည်;
+    License နှင့် ကိုက်ညီစွာမှသာ ဤဖိုင်ကို အသုံးပြုခွင့်ရှိပါသည်။
+    License မိတ္တူကို အောက်ပါနေရာတွင် ရယူနိုင်ပါသည် -
        http://www.apache.org/licenses/LICENSE-2.0
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
+    သက်ဆိုင်ရာဥပဒေအရ လိုအပ်ခြင်း သို့မဟုတ် စာဖြင့်သဘောတူထားခြင်း မရှိပါက၊
+    License အောက်တွင် ဖြန့်ချိသော software သည် "AS IS" အခြေအနေအတိုင်း
+    ဖြန့်ချိသည်ဖြစ်ပြီး၊ မည်သည့်အာမခံချက် သို့မဟုတ် စည်းကမ်းသတ်မှတ်ချက်မျှ
+    တိုက်ရိုက်ဖြစ်စေ၊ သွယ်ဝိုက်၍ဖြစ်စေ မပါဝင်ပါ။
+    ခွင့်ပြုချက်နှင့် ကန့်သတ်ချက်များအတွက် License ကို ကြည့်ရှုပါ။
 
 .. _compilation_db:
 
-Compilation database ``compile_commands.json``
-----------------------------------------------
+Compilation Database ``compile_commands.json``
+------------------------------------------------
 
-A `compilation database <https://clang.llvm.org/docs/JSONCompilationDatabase.html>`_ is
-a `JSON-formatted <https://www.json.org/>`_ file named ``compile_commands.json`` that
-contains structured data about every compilation unit in your project.
+`compilation database <https://clang.llvm.org/docs/JSONCompilationDatabase.html>`_
+ဆိုသည်မှာ သင့် project ရှိ compilation unit တိုင်း၏ ဖွဲ့စည်းထားသော data
+ကို ပါဝင်သည့် ``compile_commands.json`` ဟု အမည်ရှိသော `JSON-formatted
+<https://www.json.org/>`_ file တစ်ခု ဖြစ်ပါသည်။
 
-You can generate a project ``compile_commands.json`` using the
-:option:`pio run --target` command and ``compiledb`` target.
-A default location for ``compile_commands.json`` is a project directory.
+:option:`pio run --target` command နှင့် ``compiledb`` target ကို
+အသုံးပြု၍ project ``compile_commands.json`` ကို generate လုပ်နိုင်ပါသည်။
 
-The following build variables can be used for customization using :ref:`scripting`:
+``compile_commands.json`` အတွက် default တည်နေရာမှာ project directory
+ဖြစ်ပါသည်။
+
+:ref:`scripting` ကို အသုံးပြု၍ customization အတွက် အောက်ပါ build
+variable များကို အသုံးပြုနိုင်ပါသည် -
 
 .. list-table::
     :header-rows:  1
     :widths: 25 75
 
     * - Variable
-      - Description
+      - ဖော်ပြချက် (Description)
+
     * - ``COMPILATIONDB_PATH``
-      - A path where the ``compile_commands.json`` file should be saved.
-        A default location is the root of a project
+      - ``compile_commands.json`` file ကို သိမ်းဆည်းသင့်သည့် path။
+        default တည်နေရာမှာ project ၏ root ဖြစ်ပါသည်
+
     * - ``COMPILATIONDB_INCLUDE_TOOLCHAIN``
-      - A boolean flag to control if toolchain paths should be included in the compilation unit.
-        A default value is ``False``, only project-dependent includes are exported.
+      - compilation unit တွင် toolchain path များ ထည့်သွင်းသင့်မသင့်
+        ထိန်းချုပ်ရန် boolean flag။ default value မှာ ``False``
+        ဖြစ်ပြီး project-dependent include များကိုသာ export လုပ်ပါသည်။
 
-**Example**
+**ဥပမာ**
 
-Generate ``compile_commands.json`` with toolchain includes for each project environment
-and save database to the ":ref:`projectconf_pio_build_dir`/envname" folder:
+project environment တစ်ခုစီအတွက် toolchain include များပါသော
+``compile_commands.json`` ကို generate လုပ်ပြီး database ကို
+":ref:`projectconf_pio_build_dir`/envname" folder သို့ သိမ်းဆည်းပါ -
 
 ``platformio.ini``:
 
@@ -59,13 +66,13 @@ and save database to the ":ref:`projectconf_pio_build_dir`/envname" folder:
     import os
     Import("env")
 
-    # include toolchain paths
+    # toolchain path များ ထည့်ပါ
     env.Replace(COMPILATIONDB_INCLUDE_TOOLCHAIN=True)
 
-    # override compilation DB path
+    # compilation DB path ကို override လုပ်ပါ
     env.Replace(COMPILATIONDB_PATH=os.path.join("$BUILD_DIR", "compile_commands.json"))
 
-Generate ``compile_commands.json``
+``compile_commands.json`` ကို Generate လုပ်ခြင်း
 
 .. code::
 
